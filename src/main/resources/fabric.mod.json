@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "id": "boobsmodfabric",
+  "version": "${version}",
+  "name": "Boobsmodfabric",
+  "description": "",
+  "authors": [],
+  "contact": {},
+  "license": "MIT",
+  "icon": "assets/boobsmodfabric/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "client": [
+      "net.kunmc.lab.boobsmodfabric.client.BoobsmodfabricClient"
+    ],
+    "main": [
+      "net.kunmc.lab.boobsmodfabric.Boobsmodfabric"
+    ]
+  },
+  "mixins": [
+    "boobsmodfabric.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.11.2",
+    "fabric": "*",
+    "minecraft": "1.15.2"
+  }
+}
