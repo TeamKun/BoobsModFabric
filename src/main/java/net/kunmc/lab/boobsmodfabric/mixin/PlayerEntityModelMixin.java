@@ -9,7 +9,6 @@ import net.minecraft.client.render.entity.model.BipedEntityModel;
 import net.minecraft.client.render.entity.model.PlayerEntityModel;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.Vec3d;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -17,7 +16,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(PlayerEntityModel.class)
-public abstract class PlayerEntityModelMixin extends BipedEntityModel {
+public class PlayerEntityModelMixin extends BipedEntityModel {
 
     public ModelPart rightBoob;
     public ModelPart leftBoob;
@@ -56,7 +55,7 @@ public abstract class PlayerEntityModelMixin extends BipedEntityModel {
         this.rightBoob.visible = true;
         this.leftBoob.visible = true;
 
-        if (this.isSneaking) {
+        if (this.sneaking) {
             this.rightBoob.setPivot(-2.1F, 7.2F, -0.0F);
             this.leftBoob.setPivot(2.1F, 7.2F, -0.0F);
         } else {
@@ -73,14 +72,16 @@ public abstract class PlayerEntityModelMixin extends BipedEntityModel {
         ILivingEntityMixin livingEntityMixin = (ILivingEntityMixin) livingEntity;
         if (livingEntityMixin.getProgress() > 0) {
             float amplitude = getAmplitude(livingEntityMixin.getProgress());
-            this.rightBoob.pitch += MathHelper.sin(h * 0.67F) * amplitude * 30F;
-            this.leftBoob.pitch += MathHelper.sin(h * 0.67F) * amplitude * 30F;
+            this.rightBoob.pivotY += MathHelper.sin(h * 0.8F) * amplitude * 0.5F;
+            this.leftBoob.pivotY += MathHelper.sin(h * 0.8F) * amplitude * 0.5F;
+            this.rightBoob.pitch += MathHelper.sin(h * 0.8F) * amplitude * 0.1F;
+            this.leftBoob.pitch += MathHelper.sin(h * 0.8F) * amplitude * 0.1F;
         }
     }
 
     public float getAmplitude(float x) {
         x = Math.max(0, Math.min(1, x));
-        return 1F - (float) Math.pow(1 - x, 4);
+        return 1F - (float) Math.pow(1 - x, 3);
     }
 
     public PlayerEntityModelMixin(float scale) {
