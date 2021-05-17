@@ -4,8 +4,8 @@
   "package": "net.kunmc.lab.boobsmodfabric.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
-    "PlayerEntityModelMixin",
-    "LivingEntityMixin"
+    "LivingEntityMixin",
+    "PlayerEntityModelMixin"
   ],
   "client": [
   ],

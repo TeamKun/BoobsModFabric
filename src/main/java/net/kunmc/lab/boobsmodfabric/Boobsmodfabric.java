@@ -1,24 +1,14 @@
 package net.kunmc.lab.boobsmodfabric;
 
-import io.netty.buffer.Unpooled;
 import net.fabricmc.api.ModInitializer;
-import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
-import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
-import net.fabricmc.fabric.api.event.client.ClientTickCallback;
-import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.kunmc.lab.boobsmodfabric.interfaces.ILivingEntityMixin;
-import net.minecraft.client.options.KeyBinding;
-import net.minecraft.client.util.InputUtil;
 import net.minecraft.entity.attribute.ClampedEntityAttribute;
 import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.effect.StatusEffect;
-import net.minecraft.network.PacketByteBuf;
-import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
-import org.lwjgl.glfw.GLFW;
 
 public class Boobsmodfabric implements ModInitializer {
 
@@ -40,11 +30,7 @@ public class Boobsmodfabric implements ModInitializer {
 
         ServerPlayNetworking.registerGlobalReceiver(SHAKE_C2S_PACKET_ID, (server, player, handler, buf, responseSender) -> {
             server.execute(() -> {
-                server.getPlayerManager().getPlayerList().forEach(serverPlayerEntity -> {
-                    PacketByteBuf buffer = PacketByteBufs.create();
-                    buffer.writeInt(player.getEntityId());
-                    ServerPlayNetworking.send(serverPlayerEntity, Boobsmodfabric.SHAKE_S2C_PACKET_ID, buffer);
-                });
+                ((ILivingEntityMixin) player).shake(30);
             });
         });
     }
