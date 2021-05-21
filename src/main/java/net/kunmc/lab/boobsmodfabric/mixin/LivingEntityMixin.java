@@ -3,12 +3,12 @@ package net.kunmc.lab.boobsmodfabric.mixin;
 import net.kunmc.lab.boobsmodfabric.Boobsmodfabric;
 import net.kunmc.lab.boobsmodfabric.interfaces.ILivingEntityMixin;
 import net.kunmc.lab.boobsmodfabric.network.ServerNetworking;
-import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.Hand;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
@@ -48,7 +48,7 @@ public abstract class LivingEntityMixin extends Entity implements ILivingEntityM
 
     public void shake(int progress) {
         shakeProgress = progress;
-        if (world instanceof ClientWorld) {
+        if (!(world instanceof ServerWorld)) {
             return;
         }
         if (!((Object) this instanceof PlayerEntity)) {
@@ -59,7 +59,7 @@ public abstract class LivingEntityMixin extends Entity implements ILivingEntityM
 
     @Inject(method = "jump", at = @At("TAIL"))
     private void jumpInject(CallbackInfo ci) {
-        if (world instanceof ClientWorld) {
+        if (!(world instanceof ServerWorld)) {
             return;
         }
         shake();
@@ -67,7 +67,7 @@ public abstract class LivingEntityMixin extends Entity implements ILivingEntityM
 
     @Inject(method = "swingHand(Lnet/minecraft/util/Hand;Z)V", at = @At("TAIL"))
     private void swingHand(Hand hand, boolean bl, CallbackInfo ci) {
-        if (world instanceof ClientWorld) {
+        if (!(world instanceof ServerWorld)) {
             return;
         }
         shake(15);
@@ -75,7 +75,7 @@ public abstract class LivingEntityMixin extends Entity implements ILivingEntityM
 
     @Inject(method = "takeKnockback", at = @At("TAIL"))
     private void takeKnockBack(float f, double d, double e, CallbackInfo ci) {
-        if (world instanceof ClientWorld) {
+        if (!(world instanceof ServerWorld)) {
             return;
         }
         shake();
@@ -83,7 +83,7 @@ public abstract class LivingEntityMixin extends Entity implements ILivingEntityM
 
     @Inject(method = "tickMovement", at = @At("TAIL"))
     private void tickMovement(CallbackInfo ci) {
-        if (world instanceof ClientWorld) {
+        if (!(world instanceof ServerWorld)) {
             return;
         }
         if (!isSprinting()) {
