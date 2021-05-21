@@ -32,17 +32,17 @@ public class PlayerEntityModelMixin extends BipedEntityModel {
 
     @Inject(method = "<init>(FZ)V", at = @At("TAIL"))
     private void init(CallbackInfo info) {
-        this.rightBoob = new ModelPart(this, 22, 22);
+        this.rightBoob = new ModelPart(this, 16, 20);
         this.rightBoob.addCuboid(-2.0F, -2.0F, -2.0F, 4.0F, 4.0F, 4.0F, 0);
         this.rightBoob.setPivot(-2.1F, 4.2F, -3.0F);
-        this.leftBoob = new ModelPart(this, 22, 22);
+        this.leftBoob = new ModelPart(this, 20, 20);
         this.leftBoob.addCuboid(-2.0F, -2.0F, -2.0F, 4.0F, 4.0F, 4.0F, 0);
         this.leftBoob.setPivot(2.1F, 4.2F, -3.0F);
 
-        this.smallRightBoob = new ModelPart(this, 22, 22);
+        this.smallRightBoob = new ModelPart(this, 16, 20);
         this.smallRightBoob.addCuboid(-2.0F, -2.0F, 0.5F, 4.0F, 4.0F, 4.0F, 0);
         this.smallRightBoob.setPivot(-2.1F, 4.2F, -3.0F);
-        this.smallLeftBoob = new ModelPart(this, 22, 22);
+        this.smallLeftBoob = new ModelPart(this, 20, 20);
         this.smallLeftBoob.addCuboid(-2.0F, -2.0F, 0.5F, 4.0F, 4.0F, 4.0F, 0);
         this.smallLeftBoob.setPivot(2.1F, 4.2F, -3.0F);
     }
