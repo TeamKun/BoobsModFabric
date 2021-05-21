@@ -40,10 +40,10 @@ public class PlayerEntityModelMixin extends BipedEntityModel {
         this.leftBoob.setPivot(2.1F, 4.2F, -3.0F);
 
         this.smallRightBoob = new ModelPart(this, 22, 22);
-        this.smallRightBoob.addCuboid(-2.0F, -2.0F, -0.5F, 4.0F, 4.0F, 4.0F, 0);
+        this.smallRightBoob.addCuboid(-2.0F, -2.0F, 0.5F, 4.0F, 4.0F, 4.0F, 0);
         this.smallRightBoob.setPivot(-2.1F, 4.2F, -3.0F);
         this.smallLeftBoob = new ModelPart(this, 22, 22);
-        this.smallLeftBoob.addCuboid(-2.0F, -2.0F, -0.5F, 4.0F, 4.0F, 4.0F, 0);
+        this.smallLeftBoob.addCuboid(-2.0F, -2.0F, 0.5F, 4.0F, 4.0F, 4.0F, 0);
         this.smallLeftBoob.setPivot(2.1F, 4.2F, -3.0F);
     }
 
@@ -104,7 +104,7 @@ public class PlayerEntityModelMixin extends BipedEntityModel {
         if (livingEntityMixin.getProgress() > 0) {
             float amplitude = getAmplitude(livingEntityMixin.getProgress());
             if (size == 1) {
-                amplitude *= 0.5;
+                amplitude *= 0.4;
             }
             this.rightBoob.pivotY += MathHelper.sin(h * 0.8F) * amplitude * 0.5F;
             this.leftBoob.pivotY += MathHelper.sin(h * 0.8F) * amplitude * 0.5F;
